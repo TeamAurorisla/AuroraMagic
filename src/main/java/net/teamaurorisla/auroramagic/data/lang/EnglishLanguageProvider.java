@@ -4,6 +4,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.teamaurorisla.auroramagic.AuroraMagic;
 import net.teamaurorisla.auroramagic.registry.AMBlock;
+import net.teamaurorisla.auroramagic.registry.AMItem;
+import net.teamaurorisla.auroramagic.spell.SpellSchool;
 
 public class EnglishLanguageProvider extends LanguageProvider {
 
@@ -14,6 +16,25 @@ public class EnglishLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         this.add(AMBlock.ARCANE_PEDESTAL.get(), "Arcane Pedestal");
+        this.add(AMItem.BLAZE_FOCUS.get(), "Blaze Focus");
+        this.add(AMItem.FROST_FOCUS.get(), "Frost Focus");
+        this.add(AMItem.STORM_FOCUS.get(), "Storm Focus");
+        this.add(AMItem.EARTH_FOCUS.get(), "Earth Focus");
+
+        this.add(SpellSchool.BLAZE.translationKey(), "Blaze");
+        this.add(SpellSchool.FROST.translationKey(), "Frost");
+        this.add(SpellSchool.STORM.translationKey(), "Storm");
+        this.add(SpellSchool.EARTH.translationKey(), "Earth");
+        this.add(SpellSchool.DIVINE.translationKey(), "Divine");
+
+        this.add("message.auroramagic.cast.blaze_burst", "Blaze Burst released!");
+        this.add("message.auroramagic.cast.frost_nova", "Frost Nova released!");
+        this.add("message.auroramagic.cast.storm_strike", "Storm Strike released!");
+        this.add("message.auroramagic.cast.earth_guard", "Earth Guard released!");
+        this.add("message.auroramagic.cast.overload", "Overload cast: %1$s");
+        this.add("message.auroramagic.cast.blocked_overload", "You are overloaded and cannot overload-cast again yet!");
+        this.add("message.auroramagic.cast.insufficient_mana", "Not enough mana to cast this spell.");
+        this.add("message.auroramagic.mana.overload_recovered", "Your mana overload has recovered.");
 
 
         this.add("attribute.auroramagic.mana_efficiency", "Mana Efficiency");

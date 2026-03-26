@@ -31,6 +31,7 @@ public class AuroraMagic {
         bus.addListener(this::onEntityAttributeModification);
 
         AMItem.REGISTER.init(bus);
+        AMItem.ITEM.register(bus);
         AMAttribute.ATTRIBUTE.register(bus);
         AMEffect.EFFECT.register(bus);
         AMBlock.BLOCK.register(bus);

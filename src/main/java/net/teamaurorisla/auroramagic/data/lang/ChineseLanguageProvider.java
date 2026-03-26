@@ -3,6 +3,8 @@ package net.teamaurorisla.auroramagic.data.lang;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.teamaurorisla.auroramagic.AuroraMagic;
+import net.teamaurorisla.auroramagic.registry.AMItem;
+import net.teamaurorisla.auroramagic.spell.SpellSchool;
 
 public class ChineseLanguageProvider extends LanguageProvider {
 
@@ -13,6 +15,25 @@ public class ChineseLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         this.add("block.auroramagic.arcane_pedestal", "基座");
+        this.add(AMItem.BLAZE_FOCUS.get(), "炽焰焦点");
+        this.add(AMItem.FROST_FOCUS.get(), "寒冰焦点");
+        this.add(AMItem.STORM_FOCUS.get(), "风暴焦点");
+        this.add(AMItem.EARTH_FOCUS.get(), "磐石焦点");
+
+        this.add(SpellSchool.BLAZE.translationKey(), "炽焰");
+        this.add(SpellSchool.FROST.translationKey(), "寒冰");
+        this.add(SpellSchool.STORM.translationKey(), "风暴");
+        this.add(SpellSchool.EARTH.translationKey(), "磐石");
+        this.add(SpellSchool.DIVINE.translationKey(), "神圣");
+
+        this.add("message.auroramagic.cast.blaze_burst", "炽焰爆发已释放！");
+        this.add("message.auroramagic.cast.frost_nova", "寒冰新星已释放！");
+        this.add("message.auroramagic.cast.storm_strike", "风暴打击已释放！");
+        this.add("message.auroramagic.cast.earth_guard", "磐石护体已释放！");
+        this.add("message.auroramagic.cast.overload", "超载施法：%1$s");
+        this.add("message.auroramagic.cast.blocked_overload", "你正处于超载状态，暂时无法再次超载施法！");
+        this.add("message.auroramagic.cast.insufficient_mana", "魔力不足，无法释放该法术。");
+        this.add("message.auroramagic.mana.overload_recovered", "你的魔力超载已经恢复。");
 
         this.add("attribute.auroramagic.mana_efficiency", "魔导效能");
         this.add("attribute.auroramagic.spell_power", "法术强度");

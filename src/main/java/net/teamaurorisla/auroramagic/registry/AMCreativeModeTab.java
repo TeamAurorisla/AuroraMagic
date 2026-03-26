@@ -6,7 +6,11 @@ import net.minecraftforge.registries.RegistryObject;
 import net.teamaurorisla.auroramagic.AuroraMagic;
 
 import static net.teamaurorisla.auroramagic.registry.AMBlockItem.ARCANE_PEDESTAL_ITEM;
+import static net.teamaurorisla.auroramagic.registry.AMItem.BLAZE_FOCUS;
+import static net.teamaurorisla.auroramagic.registry.AMItem.EARTH_FOCUS;
 import static net.teamaurorisla.auroramagic.registry.AMItem.EXAMPLE_ITEM;
+import static net.teamaurorisla.auroramagic.registry.AMItem.FROST_FOCUS;
+import static net.teamaurorisla.auroramagic.registry.AMItem.STORM_FOCUS;
 
 public final class AMCreativeModeTab {
 
@@ -16,6 +20,10 @@ public final class AMCreativeModeTab {
             (parameters, output) -> {
                 output.accept(EXAMPLE_ITEM.item());
                 output.accept(ARCANE_PEDESTAL_ITEM.get());
+                output.accept(BLAZE_FOCUS.get());
+                output.accept(FROST_FOCUS.get());
+                output.accept(STORM_FOCUS.get());
+                output.accept(EARTH_FOCUS.get());
             });
 
 }

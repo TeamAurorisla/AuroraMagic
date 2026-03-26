@@ -21,6 +21,7 @@ public class ManaDataOverlay implements IGuiOverlay {
             ManaManager manager = ManaManager.of(player);
             graphics.drawString(font, manager.get(ManaType.STABLE) + " | " + manager.get(ManaType.MAX_STABLE), 0, 0, 0xEE7942, false);
             graphics.drawString(font, manager.get(ManaType.SURGE) + " | " + manager.get(ManaType.MAX_SURGE), 0, 10, 0x00FFFF, false);
+            graphics.drawString(font, manager.isOverloaded() ? "OVERLOAD" : "READY", 0, 20, manager.isOverloaded() ? 0xFFD700 : 0x98FB98, false);
         }
     }
 
