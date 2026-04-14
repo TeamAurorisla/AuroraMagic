@@ -34,7 +34,7 @@ public class EffectManaOverflow extends MobEffect {
         double maxStableMana = manaManager.get(ManaType.MAX_STABLE);
 
         if (stableMana <= maxStableMana) {
-            manaManager.set(ManaType.STABLE, manaManager.get(ManaType.STABLE) + 1);
+            manaManager.add(ManaType.STABLE, 1);
         }
 
     }

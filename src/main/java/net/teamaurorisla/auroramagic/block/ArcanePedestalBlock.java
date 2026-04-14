@@ -1,6 +1,7 @@
 package net.teamaurorisla.auroramagic.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.IItemHandler;
 import net.teamaurorisla.auroramagic.block.entity.ArcanePedestalBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,29 +37,37 @@ public class ArcanePedestalBlock extends Block implements EntityBlock {
         }
 
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof ArcanePedestalBlockEntity pedestal) {
-            ItemStack itemInHand = player.getItemInHand(hand);
-
-            if (!itemInHand.isEmpty()) {
-                ItemStack displayItem = pedestal.getDisplayItem();
-                if (displayItem.isEmpty()) { //放置物品
-                    ItemStack toPlace = itemInHand.copy();
-                    toPlace.setCount(1);
-                    pedestal.setDisplayItem(toPlace);
-                    itemInHand.shrink(1);
-                    return InteractionResult.SUCCESS;
-                }
-            } else { //取回物品
-                ItemStack displayItem = pedestal.getDisplayItem();
-                if (!displayItem.isEmpty()) {
-                    pedestal.clearItem();
-                    if (!player.addItem(displayItem.copy())) {
-                        player.drop(displayItem.copy(), false);
-                    }
-                    return InteractionResult.SUCCESS;
-                }
-            }
+        if (!(blockEntity instanceof ArcanePedestalBlockEntity pedestal)) {
+            return InteractionResult.PASS;
         }
+
+        IItemHandler itemHandler = pedestal.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).resolve().orElse(null);
+        if (itemHandler == null) {
+            return InteractionResult.PASS;
+        }
+
+        ItemStack itemInHand = player.getItemInHand(hand);
+
+        // Sneak forces extraction even with an item in hand; empty hand can also extract.
+        if (itemInHand.isEmpty() || player.isShiftKeyDown()) {
+            ItemStack extracted = itemHandler.extractItem(0, 1, false);
+            if (extracted.isEmpty()) {
+                return InteractionResult.PASS;
+            }
+            if (!player.addItem(extracted)) {
+                player.drop(extracted, false);
+            }
+            return InteractionResult.SUCCESS;
+        }
+
+        ItemStack toInsert = itemInHand.copy();
+        toInsert.setCount(1);
+        ItemStack remaining = itemHandler.insertItem(0, toInsert, false);
+        if (remaining.isEmpty()) {
+            itemInHand.shrink(1);
+            return InteractionResult.SUCCESS;
+        }
+
         return InteractionResult.PASS;
     }
 

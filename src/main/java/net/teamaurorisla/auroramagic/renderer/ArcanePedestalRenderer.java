@@ -10,10 +10,13 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.IItemHandler;
 import net.teamaurorisla.auroramagic.block.entity.ArcanePedestalBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,8 +28,12 @@ public class ArcanePedestalRenderer implements BlockEntityRenderer<ArcanePedesta
     public void render(ArcanePedestalBlockEntity blockEntity, float partialTick, @NotNull PoseStack poseStack,
                        @NotNull MultiBufferSource buffer, int packedLight, int packedOverlay) {
 
-        ItemStack displayItem = blockEntity.getDisplayItem();
+        IItemHandler itemHandler = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).resolve().orElse(null);
+        if (itemHandler == null) {
+            return;
+        }
 
+        ItemStack displayItem = itemHandler.getStackInSlot(0);
         if (displayItem.isEmpty()) {
             return;
         }
